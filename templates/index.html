@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color:#4d4d33;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+   padding-left: 80px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color:#ff9900;
+}
+</style>
+
+<div id="topbar" class="hoc clear">
+
+
+      <div class="fl_right">
+        <!-- ################################################################################################ -->
+        <ul class="nospace">
+
+          <li id="searchform">
+            <div>
+              <form action="{% url 'sc'%}" method="get">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" name="q" placeholder="Enter search Item&hellip;">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+
+        <!-- ################################################################################################ -->
+      </div>
+    </div>
+
+<body id="top">
+
+             <div class="dropdown" >
+  <button class="dropbtn">Category</button>
+  <div class="dropdown-content">
+    <a href="/">All product</a>
+       {% for i in cat %}
+    <a href="{{i.get_url}}">{{i.name}}</a>
+       {% endfor %}
+
+  </div>
+</div>
+
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <div id="pageintro" class="hoc clear" style="background-image:url('{% static 'hm/images/demo/backgrounds/asss.jpg'%}');">
+    <!-- ################################################################################################ -->
+    <article>
+      <h3 class="heading">QUALITY FOOD ITEMS</h3>
+      <p>Register with us and have quality food items at your door step.</p>
+      <footer>
+
+      </footer>
+    </article>
+    <!-- ################################################################################################ -->
+  </div>
+  <!-- ################################################################################################ -->
+</div>
+
+
+
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="/">All product</a></li>
+     {% for i in cat %}
+    <li><a class="dropdown-item" href={{i.get_url}}>{{i.name}}</a></li>
+    {% endfor %}
+
+  </ul>
+
+
+
+
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+
+    <section id="introblocks">
+      <ul class="nospace group btmspace-80">
+      {% for i in pg.object_list %}
+        <li class="one_third">
+          <figure><a class="imgover" href={{i.get_url}}><img src="{{i.img.url}}" style="width:400px;height:300px;"></a>
+            <figcaption>
+              <h6 class="heading">{{i.name}}</h6>
+              <p>{{i.des|truncatechars:15}}</p>
+
+
+            </figcaption>
+          </figure>
+        </li>
+
+{% endfor %}
+
+
+
+
+
+      </ul>
+    </section> <center>
+    {% for p in pg.paginator.page_range %}
+
+
+      <a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %} active {% endif %}">{{p}} </a>
+         {% endfor %}
+    </center>
+
+    <hr class="btmspace-80">
+
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+
+<script src="{% static 'hm/layout/scripts/jquery.min.js'%}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.backtotop.js'%}"></script>
+<script src="{% static 'hm/layout/scripts/jquery.mobilemenu.js'%}"></script>
+
+</body>
+</html>
+{% endblock %}

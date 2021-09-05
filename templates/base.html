@@ -1,0 +1,78 @@
+{% load static %}
+
+
+
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>shopps</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link href="{% static 'hm/layout/styles/layout.css'%}" rel="stylesheet" type="text/css" media="all">
+
+</head>
+<!--<body id="top">-->
+<!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+<!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+<!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+<!--&lt;!&ndash; Top Background Image Wrapper &ndash;&gt;-->
+<!--<div class="bgded overlay" style="background-image:url('{% static 'hm/images/demo/backgrounds/asss.jpg'%}');">-->
+  <!-- ################################################################################################ -->
+  <div class="wrapper row0">
+
+  </div>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+        <!-- ################################################################################################ -->
+        <h1><a href="/">ONLINE SHOPPING</a></h1>
+        <!-- ################################################################################################ -->
+      </div>
+
+
+       <nav id="mainav" class="fl_right">
+           <ul class="clear">
+               <li class="active"><a href="/">home</a> </li>
+               {% if its > 0 %}
+                <li class="active"><a class="fa fa-shopping-cart"  href="{% url 'details' %}">{{its}} Cart</a> </li>
+               {% else %}
+               <li class="active"><a class="fa fa-shopping-cart"  href="{% url 'details' %}"> Cart</a> </li>
+               {% endif %}
+               {% if request.session.username %}
+
+               <li class="active"><a href="#">Hai {{request.session.username}}</a></li>
+               <li class="active"><a href="{% url 'logout' %}">Logout</a> </li>
+               {% else %}
+
+                <li class="active"><a href="{% url 'log' %}">Login</a> </li>
+
+                <li class="active"><a href="{% url 'reg' %}">Register</a> </li>
+                {% endif %}
+
+
+
+
+           </ul>
+
+
+</nav>
+
+
+
+
+        <!-- ################################################################################################ -->
+
+    </header>
+  </div>
+</div>
+{% block content %}
+{% endblock %}
+</body>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</html>

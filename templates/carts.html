@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="{% static 'cat.css'%}" media="screen" title="no title" charset="utf-8">
+
+    <meta name="robots" content="noindex,follow" />
+  </head>
+ <body>
+<!-- partial:index.partial.html -->
+<h1>Shopping Cart</h1>
+
+<div class="shopping-cart">
+
+  <div class="column-labels">
+    <label class="product-image">Image</label>
+    <label class="product-details">Product</label>
+    <label class="product-price">Price</label>
+    <label class="product-quantity">Quantity</label>
+    <label class="product-removal">Remove</label>
+    <label class="product-line-price">Total</label>
+  </div>
+{% for i in ci %}
+  <div class="product">
+    <div class="product-image">
+      <a href="{{i.prd.get_url}}"> <img src="{{i.prd.img.url}}"></a>
+    </div>
+    <div class="product-details">
+      <div class="product-title">{{i.prd.name}}</div>
+      <p class="product-description">{{i.prd.des|truncatechars:60}}.</p>
+    </div>
+    <div class="product-price">{{i.prd.price}}</div>
+    <div class="product-quantity">
+
+      <a href="{% url 'minuss' i.prd.id %}" style="float:left;padding:9px;color:white;background-color:#ff9800">-</a>
+      <label style="float:left;padding:8px;font-family:Arial;color:#2196f3;">{{i.qlt}}</label>
+
+     <a href="{% url 'addcarts' i.prd.id %}" style="float:left;padding:9px;color:white;background-color:#04aa6d">+</a>
+
+
+
+<!--      <input type="button" value="-">-->
+<!--      {{i.qlt}}<input type="button" value="+">-->
+ </div>
+    <div class="product-removal">
+      <a href="{% url 'removes' i.prd.id %}"><button class="remove-product">
+        Remove
+      </button></a>
+    </div>
+    <div class="product-line-price">{{i.total}}</div>
+  </div>
+
+{% endfor %}
+
+  <div class="totals">
+    <div class="totals-item">
+      <label>Subtotal</label>
+      <div class="totals-value" id="cart-subtotal">{{t}}</div>
+    </div>
+    <div class="totals-item">
+      <label>Tax (5%)</label>
+      <div class="totals-value" id="cart-tax">{{tax}}</div>
+    </div>
+    <div class="totals-item">
+      <label>Shipping</label>
+      <div class="totals-value" id="cart-shipping">15.00</div>
+    </div>
+    <div class="totals-item totals-item-total">
+      <label>Grand Total</label>
+      <div class="totals-value" id="cart-total">{{total}}</div>
+    </div>
+  </div>
+
+      <button class="checkout">Checkout</button>
+
+</div>
+<!-- partial -->
+
+
+</body>
+{% endblock %}
