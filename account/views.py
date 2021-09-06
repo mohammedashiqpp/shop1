@@ -44,5 +44,5 @@ def logout(request):
     try:
         del request.session['username']
     except:
-        return redirect('/')
-    return redirect('/')
+        return redirect('home')
+    return redirect('home')
