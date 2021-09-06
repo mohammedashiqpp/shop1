@@ -25,7 +25,7 @@ def cart(request,tot=0,count=0,cartitem=None,tax=0.05,shipping=15):
 def cartidd(request):
     cid=request.session.session_key
     if not cid:
-        cid=request.session_create()
+        cid=request.session.create()
     return cid
 def addcart(request,prdid):
     proud=product.objects.get(id=prdid)
